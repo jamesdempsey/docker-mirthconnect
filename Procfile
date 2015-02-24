@@ -1,1 +1,1 @@
-web: mirthconnect-wrapper.sh
+web: ./mirthconnect-wrapper.sh

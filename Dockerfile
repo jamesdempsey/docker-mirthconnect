@@ -12,6 +12,9 @@ RUN curl -O http://downloads.mirthcorp.com/connect/3.1.1.7461.b23/mirthconnect-3
 RUN chmod +x mirthconnect-3.1.1.7461.b23-unix.sh mirthconnect-install-wrapper.sh mirthconnect-wrapper.sh
 RUN ./mirthconnect-install-wrapper.sh
 
-EXPOSE 80 9661
+RUN apt-get -y install nginx
+ADD templates/etc /etc
+
+EXPOSE 3000 9661
 
 CMD ./mirthconnect-wrapper.sh

@@ -16,7 +16,7 @@
       <pluginProperties/>
       <listenerConnectorProperties version="3.1.1">
         <host>0.0.0.0</host>
-        <port>6661</port>
+        <port>9661</port>
       </listenerConnectorProperties>
       <sourceConnectorProperties version="3.1.1">
         <responseVariable>Auto-generate (After source transformer)</responseVariable>

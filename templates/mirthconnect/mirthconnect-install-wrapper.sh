@@ -24,8 +24,8 @@
 
 
 
-
-
+80
+443
 
 
 
@@ -35,6 +35,7 @@
 /opt/mirthconnect/apps
 /opt/mirthconnect/logs
 
+n
 n
 !
 

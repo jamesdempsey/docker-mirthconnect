@@ -8,8 +8,8 @@ RUN apt-get update && apt-get -y install tasksel lamp-server^ oracle-java7-insta
 ADD templates/mirthconnect /usr/local/mirthconnect
 WORKDIR /usr/local/mirthconnect
 
-RUN curl -O http://downloads.mirthcorp.com/connect/3.1.1.7461.b23/mirthconnect-3.1.1.7461.b23-unix.sh
-RUN chmod +x mirthconnect-3.1.1.7461.b23-unix.sh mirthconnect-install-wrapper.sh mirthconnect-wrapper.sh
+RUN curl -O http://downloads.mirthcorp.com/connect/3.2.0.7628.b1617/mirthconnect-3.2.0.7628.b1617-unix.sh
+RUN chmod +x mirthconnect-3.2.0.7628.b1617-unix.sh mirthconnect-install-wrapper.sh mirthconnect-wrapper.sh
 RUN ./mirthconnect-install-wrapper.sh
 
 RUN apt-get -y install nginx

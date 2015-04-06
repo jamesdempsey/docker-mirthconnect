@@ -6,8 +6,8 @@ WORKDIR /usr/local/mirthconnect
 
 ADD templates/mirthconnect/mirthconnect-install-wrapper.sh /usr/local/mirthconnect/mirthconnect-install-wrapper.sh
 
-RUN curl -O http://downloads.mirthcorp.com/connect/3.2.0.7628.b1617/mirthconnect-3.2.0.7628.b1617-unix.sh \
- && chmod +x mirthconnect-3.2.0.7628.b1617-unix.sh \
+RUN wget http://downloads.mirthcorp.com/connect/3.2.1.7650.b40/mirthconnect-3.2.1.7650.b40-unix.sh \
+ && chmod +x mirthconnect-3.2.1.7650.b40-unix.sh \
  && ./mirthconnect-install-wrapper.sh
 
 ADD templates/etc /etc

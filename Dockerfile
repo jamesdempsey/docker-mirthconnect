@@ -1,6 +1,7 @@
-FROM dockerfile/java:oracle-java7
+FROM java:7
 
-RUN apt-get update && apt-get -y install nginx --no-install-recommends
+RUN apt-get update && apt-get -y install nginx --no-install-recommends \
+  && apt-get -y install netcat
 
 WORKDIR /usr/local/mirthconnect
 

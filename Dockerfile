@@ -1,7 +1,6 @@
-FROM java:7
+FROM quay.io/aptible/java:oracle-java7
 
-RUN apt-get update && apt-get -y install nginx --no-install-recommends \
-  && apt-get -y install netcat
+RUN apt-get update && apt-get -y install nginx --no-install-recommends
 
 WORKDIR /usr/local/mirthconnect
 

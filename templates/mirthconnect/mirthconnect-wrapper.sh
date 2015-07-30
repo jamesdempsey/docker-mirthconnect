@@ -6,6 +6,25 @@
 # Clean-up old log file
 rm -f /opt/mirthconnect/logs/mirth.log
 
+# Replace derby with postgresql
+sed -i 's/database = derby/database = postgres/' /usr/local/mirthconnect/conf/mirth.properties
+
+if [ -n "$DATABASE_URL" ]; then
+  proto=`echo $DATABASE_URL | grep '://' | sed -e 's,^\(.*://\).*,\1,g'`
+  url=`echo $DATABASE_URL | sed -e "s,$proto,,g" | cut -d@ -f2`
+  userpass=`echo $DATABASE_URL | sed -e "s,$proto,,g" | cut -d@ -f1`
+  user=`echo $userpass | cut -d: -f1`
+  pass=`echo $userpass | cut -d: -f2`
+
+  sed -i "s,database.url = jdbc:derby:\${dir.appdata}/mirthdb;create=true,database.url = jdbc:$proto$url," /usr/local/mirthconnect/conf/mirth.properties
+  sed -i "s/database.username =/database.username = $user/" /usr/local/mirthconnect/conf/mirth.properties
+  sed -i "s/database.password =/database.password = $pass/" /usr/local/mirthconnect/conf/mirth.properties
+else
+  sed -i 's,database.url = jdbc:derby:${dir.appdata}/mirthdb;create=true,database.url = jdbc:postgresql://localhost:5432/mirthdb,' /usr/local/mirthconnect/conf/mirth.properties
+fi
+
+cat /usr/local/mirthconnect/conf/mirth.properties
+
 # Start Mirth Connect
 ./mcservice start
 

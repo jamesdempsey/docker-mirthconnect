@@ -1,37 +1,40 @@
 #!/bin/bash
 
+# Add user for NGiNX
+useradd www-data
+
 # Start NGiNX reverse proxy
 /usr/sbin/nginx
 
 # Clean-up old log file
-rm -f /opt/mirthconnect/logs/mirth.log
+rm -f /opt/mirthconnect/apps/logs/mirth.log
 
 # Start Mirth Connect
-./mcservice start
+/opt/mirthconnect/apps/mcservice start
 
 # Make sure that the service has actually started
-while [ ! -f /opt/mirthconnect/logs/mirth.log ]
+while [ ! -f /opt/mirthconnect/apps/logs/mirth.log ]
 do
   sleep 0.1
 done
 
 # Don't spin wait if the service is dead
-./mcservice status
-if [[ `./mcservice status` != "The daemon is running." ]]; then
-    echo "The daemon is not running"
+/opt/mirthconnect/apps/mcservice status
+if [[ `/opt/mirthconnect/apps/mcservice status` != "mcservice is running." ]]; then
+    echo "mcservice is not running."
     exit 1
 fi
 
-while ! echo exit | nc localhost 443; do sleep 0.1; done
+while ! echo exit | nc localhost 8443; do sleep 0.1; done
 
 pids=$(pgrep java)
 echo $pids
 
 echo user changepw admin $MIRTH_ADMIN_PW > pw.txt
-java -jar mirth-cli-launcher.jar -a https://localhost:443 -u admin -p admin -v 0.0.0 -s pw.txt >/dev/null
+/opt/mirthconnect/apps/mccommand -s /usr/local/mirthconnect/pw.txt >/dev/null
 
-java -jar mirth-cli-launcher.jar -a https://localhost:443 -u admin -p $MIRTH_ADMIN_PW -v 0.0.0 -s mirthconnect-cli.txt
+/opt/mirthconnect/apps/mccommand -p $MIRTH_ADMIN_PW -s /usr/local/mirthconnect/mirthconnect-cli.txt
 
-tail -f /opt/mirthconnect/logs/mirth.log --pid=$pids
+tail -f /opt/mirthconnect/apps/logs/mirth.log --pid=$pids
 
 service nginx stop

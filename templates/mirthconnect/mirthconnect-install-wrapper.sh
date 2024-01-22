@@ -1,6 +1,6 @@
 #!/bin/sh
 
-./mirthconnect-3.2.2.7694.b68-unix.sh <<!
+./mirthconnect-4.4.2.b326-unix.sh <<!
 
 
 
@@ -18,24 +18,33 @@
 
 
 
-
-
-
-
-
-
-
-80
-443
-
-
-
+1
 
 
 /opt/mirthconnect/apps
-/opt/mirthconnect/logs
 
-n
+
+
+
+
+
+
+
+
+
+
+
+12
+1
+1
+1
+1
+
+
+/opt/mirthconnect/appdata
+/opt/mirthconnect/apps/logs
+
+
 n
 !
 

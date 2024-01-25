@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Add user for NGiNX
-useradd www-data
-
 # Start NGiNX reverse proxy
 /usr/sbin/nginx
 

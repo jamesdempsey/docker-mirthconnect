@@ -1,4 +1,4 @@
-FROM amazonlinux:2.0.20240109.0
+FROM amazonlinux:2.0.20241113.1
 
 RUN amazon-linux-extras enable corretto8 nginx1
 
